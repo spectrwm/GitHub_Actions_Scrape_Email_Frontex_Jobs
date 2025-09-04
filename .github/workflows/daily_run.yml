@@ -25,7 +25,7 @@ jobs:
 
     - name: Run scraping script
       env:
-        EMAIL_SENDER: ${{ secrets.EMAIL_USER }}
-        EMAIL_PASSWORD: ${{ secrets.EMAIL_PASS }}
+        EMAIL_USER: ${{ secrets.EMAIL_USER }}
+        EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
         EMAIL_RECIPIENTS: ${{ secrets.EMAIL_RECIPIENTS }}
       run: python scrape_email_frontex_jobs.py
