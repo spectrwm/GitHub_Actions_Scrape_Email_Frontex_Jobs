@@ -30,10 +30,17 @@ jobs:
         EMAIL_RECIPIENTS: ${{ secrets.EMAIL_RECIPIENTS }}
       run: python scrape_email_frontex_jobs.py
 
-    - name: Commit and push last_jobs.json
+    - name: Commit and push last_jobs.json if changed
       run: |
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
+
         git add last_jobs.json
-        git commit -m "Update last_jobs.json [automated commit]"
-        git push
+
+        # Check if there are any staged changes before committing
+        if git diff --cached --quiet; then
+          echo "No changes to commit"
+        else
+          git commit -m "Update last_jobs.json [automated commit]"
+          git push
+        fi
