@@ -18,7 +18,7 @@ def fetch_jobs():
     soup = BeautifulSoup(response.text, 'html.parser')
     jobs = []
 
-    for item in soup.select(".careers-list-item"):
+    for item in soup.select("careers-list-item"):
         title = item.find("h3", class_="title").get_text(strip=True)
         deadline = item.find("dd").get_text(strip=True)
         link = item.find("a")["href"]
