@@ -28,7 +28,7 @@ def fetch_jobs():
             "link": link
         })
         print("Page Title:", title)
-
+    print(jobs)
     return jobs
 
 def load_last_jobs():
@@ -69,6 +69,7 @@ def send_email(new_jobs):
 
 def main():
     current_jobs = fetch_jobs()
+    print("fetch_jobs() ok")
     previous_jobs = load_last_jobs()
     new_jobs = find_new_jobs(current_jobs, previous_jobs)
 
