@@ -39,8 +39,11 @@ def fetch_jobs():
 
 def load_last_jobs():
     if DATA_FILE.exists():
-        with open(DATA_FILE, "r") as f:
-            return json.load(f)
+        try:
+            with open(DATA_FILE, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except json.JSONDecodeError:
+            return []  # corrupted or empty file
     return []
 
 def save_jobs(jobs):
