@@ -70,7 +70,7 @@ def main():
     current_jobs = fetch_jobs()
     previous_jobs = load_last_jobs()
     new_jobs = find_new_jobs(current_jobs, previous_jobs)
-
+    print(EMAIL_USER)
     if new_jobs:
         print(f"Found {len(new_jobs)} new jobs.")
         send_email(new_jobs)
