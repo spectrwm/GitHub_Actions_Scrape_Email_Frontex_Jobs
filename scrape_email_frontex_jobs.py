@@ -9,6 +9,10 @@ import os
 URL = "https://www.frontex.europa.eu/careers/vacancies/open-vacancies/"
 DATA_FILE = Path("last_jobs.json")
 
+# create empty file if it doesn't exist
+DATA_FILE.parent.mkdir(parents=True, exist_ok=True)
+DATA_FILE.touch(exist_ok=True)
+
 EMAIL_USER = os.getenv("EMAIL_USER")
 EMAIL_PASS = os.getenv("EMAIL_PASS") 
 recipients = os.getenv("EMAIL_RECIPIENTS").split(',')
