@@ -9,9 +9,12 @@ import os
 URL = "https://www.frontex.europa.eu/careers/vacancies/open-vacancies/"
 DATA_FILE = Path("last_jobs.json")
 
-EMAIL_USER = os.environ["EMAIL_USER"]
-EMAIL_PASS = os.environ["EMAIL_PASS"] 
+EMAIL_USER = os.getenv("EMAIL_USER")
+EMAIL_PASS = os.getenv("EMAIL_PASS") 
 recipients = os.getenv("EMAIL_RECIPIENTS").split(',')
+recipients = [r.strip() for r in recipients if r.strip()]
+if not EMAIL_USER or not EMAIL_PASS or not recipients:
+    raise ValueError("Missing EMAIL_USER or EMAIL_PASS or recipients")
 
 def fetch_jobs():
     response = requests.get(URL)
@@ -70,7 +73,7 @@ def main():
     current_jobs = fetch_jobs()
     previous_jobs = load_last_jobs()
     new_jobs = find_new_jobs(current_jobs, previous_jobs)
-    print(EMAIL_USER)
+    
     if new_jobs:
         print(f"Found {len(new_jobs)} new jobs.")
         send_email(new_jobs)
