@@ -84,9 +84,10 @@ def main():
     if new_jobs:
         print(f"Found {len(new_jobs)} new jobs.")
         send_email(new_jobs)
-        save_jobs(current_jobs)
     else:
         print("No new jobs found.")
+
+    save_jobs(current_jobs)
 
 if __name__ == "__main__":
     main()
